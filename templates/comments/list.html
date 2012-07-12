@@ -1,0 +1,15 @@
+{% load humanize %}
+<div class="center">
+	<hr>
+	<h3>Комментарии</h4>
+	{% for comment in comment_list %}
+		<div id="c{{ comment.id }}" class="note comment">
+			<p class="info">
+				<span class="badge">{{ comment.submit_date|naturaltime }}</span>
+				<span class="badge">{{ comment.user.username }}</span>
+				<span><a href="#c{{ comment.id }}">#</a></span>
+			</p>
+			{{ comment.comment|safe }}
+		</div>
+	{% endfor %}
+</div>

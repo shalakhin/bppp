@@ -1,0 +1,13 @@
+<form action="" method="post" accept-charset="utf-8">
+	{% csrf_token %} 
+	{{ form.as_p }}
+	<p>
+		<input type="submit" name="submit" value="Готово!" class="btn">		
+	</p>
+</form>
+<script type="text/javascript">
+	$('#id_content').wysihtml5({
+		"link":false,
+		"image":false
+	});
+</script>

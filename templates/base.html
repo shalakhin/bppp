@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<meta name="author" content="bppp">
+	<meta name="description" content="Перевод и озвучание сериалов, фильмов и аниме">
+	<title>
+		{% block title %}{% endblock title %}
+		Бюро почти правильного перевода (и озвучания)
+	</title>
+	{% load staticfiles %}
+    <link rel="icon" href="{{ STATIC_URL }}favicon.png">
+	<link rel="stylesheet" href="{{ STATIC_URL }}bppp/css/bppp.css" type="text/css" media="screen" charset="utf-8">
+	{% block cssdata %}{% endblock cssdata %}
+	<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js" charset="utf-8"></script>
+	<script type="text/javascript" src="{{ STATIC_URL }}bppp/js/magic.min.js" charset="utf-8"></script>
+	{% block jsdata %}{% endblock jsdata %}
+</head>
+<body>
+	{% load humanize %}
+	{% block toolbar %}{% include "toolbar.html" %}{% endblock toolbar %}
+	<div class="container-fixed">
+		<div class="menubar">
+			<ul class="menu hlist">
+                {# <li> #}
+                {#	<a href="/releases/">Релизы</a> #}
+                {#  </li>#}
+				<li>
+					<a href="/notes/">Записки</a>
+				</li>
+                {# <li> #}
+                {#	<a href="/gallery/">Галерея</a> #}
+                {# </li> #}
+                <li>
+					<a href="/" class="logo">
+						<img src="{{ STATIC_URL }}bppp/img/logo_bw.png">
+					</a>
+				</li>
+                {# <li> #}
+                {#	<a href="/blog/">Блог</a> #}
+                {#    </li> #}
+				<li>
+					<a href="/about/">О нас</a>
+				</li>
+                {# <li> #}
+                {#	<a href="/feedback/">Написать нам</a> #}
+                {#  </li> #}
+			</ul>
+			<p class="brand">
+				Бюро почти правильного перевода (и озвучания)
+			</p>
+		</div>
+		{% block header %}{% endblock header %}
+		{% block content %}{% endblock content %}
+		{% block footer %}{% endblock footer %}
+	</div>
+<script type="text/javascript">
+
+  var _gaq = _gaq || [];
+  _gaq.push(['_setAccount', 'UA-32310766-1']);
+  _gaq.push(['_trackPageview']);
+
+  (function() {
+    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+  })();
+
+</script>
+</body>
+</html>

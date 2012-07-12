@@ -1,0 +1,21 @@
+{% extends "base.html" %}
+
+{% load spaceship %}
+
+{% block toolbar %}
+	{% if user.is_authenticated %}
+		{% include "toolbar.html" %}
+	{% else %}
+		<div class="toolbar center">
+			<a href="/spaceship/connect/" class="btn btn-small">Зайти в бюро</a>
+			<a href="#" data-dismiss="alert" class="btn btn-small">Закрыть</a>
+		</div>
+	{% endif %}
+{% endblock toolbar %}
+
+{% block content %}
+<div class="center">
+	{% load static %}
+	<img src="{{ STATIC_URL }}bppp/img/welcome.png" alt="Добро пожаловать!">
+</div>
+{% endblock content %}

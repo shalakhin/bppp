@@ -1,0 +1,24 @@
+{% load spaceship %}
+{% ifusergroup bppp %}
+	<div class="toolbar center">
+		<p class="profile">
+			<a href="#" class="btn btn-small">Настройки <b>{{ user.username }}</b></a>
+		</p>
+		<a href="/notes/create/" class="btn btn-success btn-small">Создать записку</a>
+		<a href="/notes/my/" class="btn btn-small">Мои записки</a>
+		<p class="other">
+			<a href="/spaceship/drop/" class="btn btn-small btn-danger">Выйти</a>
+		</p>
+	</div>
+{% else %}
+    {% if user.is_authenticated %}
+	<div class="toolbar center">
+		<p class="profile">
+			<a href="#" class="btn btn-small">Настройки <b>{{ user.username }}</b></a>
+        </p>
+        <p class="other">
+			<a href="/spaceship/drop/" class="btn btn-small btn-danger">Выйти</a>
+        </p>
+	</div>	
+	{% endif %}
+{% endifusergroup %}

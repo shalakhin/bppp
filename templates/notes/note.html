@@ -1,0 +1,61 @@
+{% extends "base.html" %}
+
+{% block title %}{{ note.name }}{% endblock title %}
+
+{% block cssdata %}
+<link rel="stylesheet" href="{{ STATIC_URL }}bppp/css/bootstrap-wysihtml5.min.css" type="text/css" media="screen" title="no title" charset="utf-8">
+{% endblock cssdata %}
+
+{% block jsdata %}
+<script type="text/javascript" src="{{ STATIC_URL }}bppp/js/wysihtml5.min.js" charset="utf-8"></script>
+<script type="text/javascript" src="{{ STATIC_URL }}bppp/js/bootstrap-wysihtml5.min.js" charset="utf-8"></script>
+{#{% include "emoticons.html" %}#}
+{% endblock jsdata %}
+
+{% load spaceship %}
+
+{% block header %}
+{% include "messages.html" %}
+<div class="note">
+	<h3>{{ note.name }}</h3>
+	<div class="note-info">
+		{# <span class="badge">{{ note.pubdate|date:"d F Y H:i" }}</span> #}
+		{% load humanize %}
+		<span class="badge">{{ note.pubdate|naturaltime }}</span>
+		<span class="badge">{{ note.author.username }}</span>
+		{% if note.on_top %}
+		<span class="badge badge-important">Важно</span>
+		{% endif %}
+		{% ifusergroup bppp %}
+			{% if note.public %}
+			<span class="badge badge-info">Публично</span>
+			{% endif %}
+		{% endifusergroup %}
+	</div>
+	{{ note.content|safe }}	
+</div>
+{% ifequal user.id note.author.id %}
+	<div class="center">
+		<a href="/notes/edit/{{ note.id }}/" class="btn btn-mini">Редактировать</a>
+		<a href="/notes/remove/confirm/{{ note.id }}/" class="btn btn-mini">Удалить</a>
+	</div>
+{% endifequal %}
+{% endblock header %}
+
+{% load comments %}
+
+{% block content %}
+{% render_comment_list for note %}
+{% endblock content %}
+
+{% block footer %}
+<div class="center">
+	{% if user.is_authenticated %}
+		{% render_comment_form for note %}
+	{% else %}
+		<div class="center well">
+			Коль хочешь ты весточку оставить, нужно <a href="/spaceship/connect/" class="btn btn-mini btn-success">зайти</a> на борт нашего корабля
+		</div>
+	{% endif %}
+</div>
+{% endblock footer %}

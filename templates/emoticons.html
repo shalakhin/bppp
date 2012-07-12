@@ -1,0 +1,34 @@
+<script type="text/javascript" charset="utf-8">
+var emoticons = {
+  smile: '<img src="\/static\/bppp\/img\/Smile.png" />',
+  laugh: '<img src="\/static\/bppp\/img\/Laugh.png" />',
+  grin: '<img src="\/static\/bppp\/img\/Grin.png" />',
+};
+
+var patterns = {
+  smile: /:\)/gm,
+  laugh: /:D/gm,
+  grin: /\^_\^/gm,
+};
+
+$(document).ready(function() {
+  $('p').each(function() {
+
+  var $p = $(this);
+  var html = $p.html();
+
+  $p.html(html.replace(patterns.smile, emoticons.smile).
+				replace(patterns.laugh, emoticons.laugh).
+				replace(patterns.grin, emoticons.grin));  
+ });
+ $('div').each(function() {
+
+ var $div = $(this);
+ var html = $div.html();
+
+ $div.html(html.replace(patterns.smile, emoticons.smile).
+				replace(patterns.laugh, emoticons.laugh).
+				replace(patterns.grin, emoticons.grin));  
+			});
+});
+</script>

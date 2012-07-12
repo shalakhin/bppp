@@ -1,0 +1,18 @@
+{% extends "base.html" %}
+
+{% block title %}Удаление {{ note.name }}{% endblock title %}
+
+{% block content %}
+<div class="center note">
+	<h3 class="center">Что записку удалить хочешь, уверен ты, юный подаван?</h3>
+	<p class="center">
+        <!--<img src="http://fc09.deviantart.net/fs70/i/2010/089/5/e/Kawaii_Star_Wars___Yoda_by_darren72.jpg" alt="Yoda!">
+        -->
+        <img src="http://fc04.deviantart.net/fs35/f/2008/302/0/0/Yoda_Pyong_by_Aguilera87.png" alt="Yoda">
+	</p>
+	<p class="center">
+		<a href="/notes/{{ note.id }}/" class="btn btn-success">Нет</a>
+		<a href="/notes/remove/{{ note.id }}/" class="btn btn-danger">Да</a>			
+	</p>
+</div>
+{% endblock content %}

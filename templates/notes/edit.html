@@ -1,0 +1,17 @@
+{% extends "base.html" %}
+
+{% block title %}{{ note.name }}{% endblock title %}
+
+{% block cssdata %}
+<link rel="stylesheet" href="{{ STATIC_URL }}bppp/css/bootstrap-wysihtml5.min.css" type="text/css" media="screen" title="no title" charset="utf-8">
+{% endblock cssdata %}
+
+{% block jsdata %}
+<script type="text/javascript" src="{{ STATIC_URL }}bppp/js/wysihtml5.min.js" charset="utf-8"></script>
+<script type="text/javascript" src="{{ STATIC_URL }}bppp/js/bootstrap-wysihtml5.min.js" charset="utf-8"></script>
+{% endblock jsdata %}
+
+{% block content %}
+<h3 class="center">Редактирование записки</h3>
+{% include "notes/form.html" %}
+{% endblock content %}

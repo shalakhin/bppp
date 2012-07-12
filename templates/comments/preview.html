@@ -1,0 +1,53 @@
+{% extends "base.html" %}
+{% load i18n %}
+
+{% block title %}{% trans "Preview your comment" %}{% endblock %}
+
+{% block cssdata %}
+<link rel="stylesheet" href="{{ STATIC_URL }}bppp/css/bootstrap-wysihtml5.min.css" type="text/css" media="screen" title="no title" charset="utf-8">
+{% endblock cssdata %}
+
+{% block jsdata %}
+<script type="text/javascript" src="{{ STATIC_URL }}bppp/js/wysihtml5.min.js" charset="utf-8"></script>
+<script type="text/javascript" src="{{ STATIC_URL }}bppp/js/bootstrap-wysihtml5.min.js" charset="utf-8"></script>
+{% endblock jsdata %}
+
+{% block content %}
+  {% load comments %}
+  <form action="{% comment_form_target %}" method="post">{% csrf_token %}
+    {% if next %}<div><input type="hidden" name="next" value="{{ next }}" /></div>{% endif %}
+    {% if form.errors %}
+    <h3 class="center">{% blocktrans count counter=form.errors|length %}Please correct the error below{% plural %}Please correct the errors below{% endblocktrans %}</h3>
+    {% else %}
+    <h3 class="center">{% trans "Preview your comment" %}</h3>
+      <div class="comment note">{{ comment|safe }}</div>
+      <p>
+      {% trans "and" %} <input type="submit" name="submit" class="btn btn-mini btn-success" value="{% trans "Post your comment" %}" id="submit" /> {% trans "or make changes" %}:
+      </p>
+    {% endif %}
+    {% for field in form %}
+      {% if field.is_hidden %}
+        <div>{{ field }}</div>
+      {% else %}
+		{% if field.name != 'name' and field.name != 'url' and field.name != 'email' %}
+	        {% if field.errors %}{{ field.errors }}{% endif %}
+	        <p
+	          {% if field.errors %} class="error"{% endif %}
+	          {% ifequal field.name "honeypot" %} style="display:none;"{% endifequal %}>
+	          {{ field.label_tag }} {{ field }}
+	        </p>
+			{% endif %}
+      {% endif %}
+    {% endfor %}
+    <p class="submit">
+    <input type="submit" name="submit" class="btn btn-success" value="{% trans "Post" %}" />
+    <input type="submit" name="preview" class="btn" value="{% trans "Preview" %}" />
+    </p>
+  </form>
+  <script type="text/javascript">
+  	$('#id_comment').wysihtml5({
+  		"link":false,
+  		"image":false
+  	});
+  </script>
+{% endblock %}

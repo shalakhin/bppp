@@ -1,0 +1,53 @@
+{% extends "base.html" %}
+
+{% block title %}Записки{% endblock title %}
+
+{% block jsdata %}
+{% include "emoticons.html" %}
+{% endblock jsdata %}
+
+{% load spaceship %}
+{% load comments %}
+
+{% block content %}
+	<div class="center">
+		<div class="container-fixed">
+			{% include "messages.html" %}
+			<div class="note-list">
+				{% for item in top_notes %}
+                {% get_comment_count for item as comment_count %}
+				<p>
+					{# <span class="badge">{{ item.pubdate|date:"d F Y H:i" }}</span> #}
+					<span class="badge badge-important">Важно</span>
+                    {% if item.public %}
+                    {% ifusergroup bppp %}
+                    <span class="badge badge-info">Публично</span>
+                    {% endifusergroup %}
+					{% else %}
+					{# <span class="badge">&nbsp;</span> #}
+					{% endif %}
+					<a href="/notes/{{ item.id }}/">{{ item.name }}</a>		
+                    {% if comment_count > 0 %}
+                    <span class="badge"><i class="icon-comment icon-white"></i> {{ comment_count }}</span>
+                    {% endif %}
+				</p>
+				{% endfor %}
+				{% for item in notes %}
+                {% get_comment_count for item as comment_count %}
+				<p>
+					{# <span class="badge">{{ item.pubdate|date:"d F Y H:i" }}</span> #}
+					{% if item.public %}
+						{% ifusergroup bppp %}
+						<span class="badge badge-info">Публично</span>
+						{% endifusergroup %}
+					{% endif %}
+					<a href="/notes/{{ item.id }}/">{{ item.name }}</a>		
+                    {% if comment_count > 0 %}
+                    <span class="badge"><i class="icon-comment icon-white"></i> {{ comment_count }}</span>
+                    {% endif %}
+				</p>
+				{% endfor %}
+			</div>
+		</div>
+	</div>
+{% endblock content %}

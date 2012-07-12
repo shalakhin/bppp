@@ -1,0 +1,32 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+{% if form.errors %}
+<p class="alert alert-danger center">Неправильный логин или пароль! Попробуйте еще раз. :)</p>
+{% endif %}
+
+<div class="center">
+	<form method="post" action="{% url django.contrib.auth.views.login %}">
+		{% csrf_token %}
+	    {{ form.username.label_tag }}
+	    {{ form.username }}
+	    {{ form.password.label_tag }}
+	    {{ form.password }}
+		<p>
+			<input type="submit" value="Зайти" class="btn" />
+			<input type="hidden" name="next" value="/" />
+		</p>
+	</form>
+{% load url from future %}
+    <h3>Вход через социальные сети:</h3>
+    <div class="center menu">
+        <a href="{% url 'socialauth_begin' 'facebook' %}">
+            <img src="{{ STATIC_URL }}bppp/img/facebook.png" alt="Facebook">
+        </a>
+        <a href="{% url 'socialauth_begin' 'google' %}">
+            <img src="{{ STATIC_URL }}bppp/img/google.png" alt="Google">
+        </a>
+    </div>
+</div>
+{% endblock %}
