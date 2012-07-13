@@ -10,4 +10,3 @@
 
 - django-grappelli
 - django-social-auth
-- django-tagging
